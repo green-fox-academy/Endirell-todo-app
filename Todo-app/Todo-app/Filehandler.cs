@@ -34,24 +34,60 @@ namespace Todo_app
         public static void Writer(string[] arr)
         {
             string path = @"C:\Users\user\greenfox\Endirell-todo-app\Todo-app\todo.txt";
+
             
             try
-            {                
+            {
                 using (StreamWriter sw = File.AppendText(path))
                 {
-                    for (int j = 0; j < arr.Length; j++)
-                    {
+                    for (int j = 1; j < arr.Length; j++)
+                    { 
                         sw.WriteLine(arr[j]);
                     }
-                    
+
                 }
-                
+
             }
             catch (Exception e)
             {
                 Console.Clear();
             }
 
+        }
+
+        public static void Remover(string[] arr)
+        {
+            try
+            {
+                int whichline = Convert.ToInt32(arr[1]) - 1;
+
+                string path = @"C:\Users\user\greenfox\Endirell-todo-app\Todo-app\todo.txt";
+
+                string[] content = File.ReadAllLines(path);
+
+                using (StreamWriter wr = new StreamWriter(path))
+                {
+                    for (int k = 0; k < whichline; k++)
+                    {
+                       
+                        wr.WriteLine(content[k]);
+                        
+                        
+                    }
+
+                    for (int k = 0; k < arr.Length; k++)
+                    {
+
+                        wr.WriteLine(content[k]);
+
+
+                    }
+
+                }
+            }
+            catch (Exception e)
+            {
+            }
         }
 
 

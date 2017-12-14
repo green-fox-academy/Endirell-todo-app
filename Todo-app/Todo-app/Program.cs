@@ -14,27 +14,46 @@ namespace Todo_app
         {
             Console.WriteLine(" ");
             
-
-            if (args.Contains("-l"))
+            try
             {
-                Filehandler.Reader();     
-                
+                if (args[0].Contains("-l"))
+                {
+                    Filehandler.Reader();
+
+                }
+
+                if (args[0].Contains("-a"))
+                {
+                    if (args.Length == 1)
+                    {
+                        Console.WriteLine("Unable to add: no task provided");
+                    }
+
+                    else
+                    {
+                        Filehandler.Writer(args);
+                    }
+
+                        
+                }
+
+                if (args[0].Contains("-r"))
+                {
+                    Filehandler.Remover(args);
+                }
+
+                if (args[0].Contains("-c"))
+                {
+
+                }
             }
 
-            if (args.Contains("-a"))
+            catch (Exception e)
             {
-                Filehandler.Writer(args);
+                Console.Clear();
             }
 
-            if (args.Contains("-r"))
-            {
-                
-            }
 
-            if (args.Contains("-c"))
-            {
-                
-            }
 
             if (args.Length == 0)
             {
