@@ -16,15 +16,46 @@ namespace Todo_app
 
             string[] content = File.ReadAllLines(path);
 
-            foreach (string line in content)
+            if (content.Length == 0)
             {
-                Console.WriteLine(line);
+                Console.WriteLine("No todos for today! :)");
+            }
+
+            else
+            {
+                for (int i = 0; i < content.Length; i++)
+                {
+                    Console.WriteLine(i + 1 + " - " + content[i]);
+                }
             }
             
-        }        
-        
+        }
 
-       
+        public static void Writer(string[] arr)
+        {
+            string path = @"C:\Users\user\greenfox\Endirell-todo-app\Todo-app\todo.txt";
+            
+            try
+            {                
+                using (StreamWriter sw = File.AppendText(path))
+                {
+                    for (int j = 0; j < arr.Length; j++)
+                    {
+                        sw.WriteLine(arr[j]);
+                    }
+                    
+                }
+                
+            }
+            catch (Exception e)
+            {
+                Console.Clear();
+            }
+
+        }
+
+
+
 
     }
 }
