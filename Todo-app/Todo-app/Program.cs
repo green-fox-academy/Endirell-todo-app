@@ -18,7 +18,7 @@ namespace Todo_app
             {
                 if (args[0].Contains("-l"))
                 {
-                    Filehandler.Reader();
+                    Filehandler.Lister();
 
                 }
 
@@ -31,10 +31,9 @@ namespace Todo_app
 
                     else
                     {
-                        Filehandler.Writer(args);
+                        Filehandler.Adder(args);
                     }
-
-                        
+                                            
                 }
 
                 if (args[0].Contains("-r"))
@@ -46,6 +45,7 @@ namespace Todo_app
                 {
 
                 }
+                                
             }
 
             catch (Exception e)

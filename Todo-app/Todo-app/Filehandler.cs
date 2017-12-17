@@ -10,7 +10,7 @@ namespace Todo_app
     public class Filehandler
     {
         
-        public static void Reader()
+        public static void Lister()
         {
             string path = @"C:\Users\user\greenfox\Endirell-todo-app\Todo-app\todo.txt";
 
@@ -25,13 +25,13 @@ namespace Todo_app
             {
                 for (int i = 0; i < content.Length; i++)
                 {
-                    Console.WriteLine(i + 1 + " - " + content[i]);
+                    Console.WriteLine((i + 1) + " - " + content[i]);
                 }
             }
             
         }
 
-        public static void Writer(string[] arr)
+        public static void Adder(string[] arr)
         {
             string path = @"C:\Users\user\greenfox\Endirell-todo-app\Todo-app\todo.txt";
 
@@ -57,45 +57,54 @@ namespace Todo_app
 
         public static void Remover(string[] arr)
         {
-            try
+            if (arr.Length == 1)
             {
-                int whichline = Convert.ToInt32(arr[1]);
+                Console.WriteLine("Unable to remove: no index provided");
+            }
 
-                string path = @"C:\Users\user\greenfox\Endirell-todo-app\Todo-app\todo.txt";
-
-                string[] content = File.ReadAllLines(path);
-
-                if (whichline <= content.Length)
+            else
+            {
+                try
                 {
-                    using (StreamWriter wr = new StreamWriter(path))
+                    int whichline = Convert.ToInt32(arr[1]);
+
+                    string path = @"C:\Users\user\greenfox\Endirell-todo-app\Todo-app\todo.txt";
+
+                    string[] content = File.ReadAllLines(path);
+
+                    if (whichline <= content.Length)
                     {
-                        for (int k = 0; k < content.Length; k++)
+                        using (StreamWriter wr = new StreamWriter(path))
                         {
-                            if (k < whichline - 1)
+                            for (int k = 0; k < content.Length; k++)
                             {
-                                wr.WriteLine(content[k]);
+                                if (k < whichline - 1)
+                                {
+                                    wr.WriteLine(content[k]);
+                                }
+
+                                else
+                                {
+                                    wr.WriteLine(content[k + 1]);
+                                }
+
                             }
 
-                            else
-                            {
-                                wr.WriteLine(content[k + 1]);
-                            }
-                           
                         }
-
                     }
-                }
 
-                else
+                    else
+                    {
+                        Console.WriteLine("Unable to remove: index is out of bound\nYou have " + content.Length + " tasks for today.");
+                    }
+
+
+                }
+                catch (Exception e)
                 {
-                    Console.WriteLine("You have " + content.Length + " tasks for today.");
+                    Console.WriteLine("Unable to remove: index is not a number");
                 }
-
-                
-            }
-            catch (Exception e)
-            {
-            }
+            }                        
         }
 
 
