@@ -59,31 +59,39 @@ namespace Todo_app
         {
             try
             {
-                int whichline = Convert.ToInt32(arr[1]) - 1;
+                int whichline = Convert.ToInt32(arr[1]);
 
                 string path = @"C:\Users\user\greenfox\Endirell-todo-app\Todo-app\todo.txt";
 
                 string[] content = File.ReadAllLines(path);
 
-                using (StreamWriter wr = new StreamWriter(path))
+                if (whichline <= content.Length)
                 {
-                    for (int k = 0; k < whichline; k++)
+                    using (StreamWriter wr = new StreamWriter(path))
                     {
-                       
-                        wr.WriteLine(content[k]);
-                        
-                        
+                        for (int k = 0; k < content.Length; k++)
+                        {
+                            if (k < whichline - 1)
+                            {
+                                wr.WriteLine(content[k]);
+                            }
+
+                            else
+                            {
+                                wr.WriteLine(content[k + 1]);
+                            }
+                           
+                        }
+
                     }
-
-                    for (int k = 0; k < arr.Length; k++)
-                    {
-
-                        wr.WriteLine(content[k]);
-
-
-                    }
-
                 }
+
+                else
+                {
+                    Console.WriteLine("You have " + content.Length + " tasks for today.");
+                }
+
+                
             }
             catch (Exception e)
             {

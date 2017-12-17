@@ -49,12 +49,9 @@ namespace Todo_app
             }
 
             catch (Exception e)
-            {
-                Console.Clear();
+            {             
             }
-
-
-
+            
             if (args.Length == 0)
             {
                 Console.WriteLine("Command Line Todo application\n=============================\n\nCommand line arguments:" +
